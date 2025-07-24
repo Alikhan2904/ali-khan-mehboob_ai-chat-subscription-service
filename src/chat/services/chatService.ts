@@ -1,14 +1,14 @@
-import { chatRepo } from "../repositories/chatRepo";
-import { subscriptionService } from "../../subscriptions/services/subscriptionService";
-import { AppError } from "../../shared/errors";
+import { chatRepo } from '../repositories/chatRepo';
+import { subscriptionService } from '../../subscriptions/services/subscriptionService';
+import { AppError } from '../../shared/errors';
 
 export const chatService = {
   async askQuestion(userId: string, question: string) {
     // Check if user exists
-    const { prisma } = await import("../../config/db");
+    const { prisma } = await import('../../config/db');
     const user = await prisma.user.findUnique({ where: { id: userId } });
     if (!user) {
-      throw new AppError("User does not exist", 404);
+      throw new AppError('User does not exist', 404);
     }
 
     const monthlyChats = await chatRepo.getMonthlyChatsByUser(userId);
@@ -22,8 +22,7 @@ export const chatService = {
 
     await new Promise((res) => setTimeout(res, 1000));
 
-    const answer =
-      "Hi there! I am an AI created by Ali Khan Mehboob. How can I assist you today?";
+    const answer = 'Hi there! I am an AI created by Ali Khan Mehboob. How can I assist you today?';
     const tokens = 10;
     return chatRepo.createChat(userId, question, answer, tokens);
   },

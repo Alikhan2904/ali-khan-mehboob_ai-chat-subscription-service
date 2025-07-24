@@ -1,10 +1,10 @@
-export type SubscriptionTier = "Basic" | "Pro" | "Enterprise";
+export type SubscriptionTier = 'Basic' | 'Pro' | 'Enterprise';
 
 export interface Subscription {
   id: string;
   userId: string;
   tier: SubscriptionTier;
-  billingCycle: "monthly" | "yearly";
+  billingCycle: 'monthly' | 'yearly';
   price: number;
   startDate: Date;
   endDate: Date;

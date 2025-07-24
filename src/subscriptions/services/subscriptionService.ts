@@ -1,5 +1,5 @@
-import { subscriptionRepo } from "../repositories/subscriptionRepo";
-import { SubscriptionTier } from "../domain/subscription";
+import { subscriptionRepo } from '../repositories/subscriptionRepo';
+import { SubscriptionTier } from '../domain/subscription';
 
 export const subscriptionService = {
   // Simulate auto-renewal and payment failure
@@ -15,19 +15,14 @@ export const subscriptionService = {
           // Renew: set new start/end/renewal dates, reset usage
           const newStart = new Date(sub.renewalDate);
           let newEnd, newRenewal;
-          if (sub.billingCycle === "monthly") {
+          if (sub.billingCycle === 'monthly') {
             newEnd = new Date(newStart.setMonth(newStart.getMonth() + 1));
             newRenewal = new Date(newEnd);
           } else {
             newEnd = new Date(newStart.setFullYear(newStart.getFullYear() + 1));
             newRenewal = new Date(newEnd);
           }
-          await subscriptionRepo.renewSubscription(
-            sub.id,
-            newStart,
-            newEnd,
-            newRenewal
-          );
+          await subscriptionRepo.renewSubscription(sub.id, newStart, newEnd, newRenewal);
         }
       }
     }
@@ -47,9 +42,9 @@ export const subscriptionService = {
       await subscriptionRepo.consumeMessage(bundle.id);
       return;
     }
-    const error: any = new Error("All subscription bundles exhausted");
+    const error: any = new Error('All subscription bundles exhausted');
     error.statusCode = 403;
-    error.code = "SUBSCRIPTION_QUOTA_EXCEEDED";
+    error.code = 'SUBSCRIPTION_QUOTA_EXCEEDED';
     throw error;
   },
 };

@@ -1,8 +1,8 @@
-import express from "express";
-import { chatService } from "../services/chatService";
+import express from 'express';
+import { chatService } from '../services/chatService';
 const router = express.Router();
 
-router.post("/", async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const { userId, question } = req.body;
     const result = await chatService.askQuestion(userId, question);

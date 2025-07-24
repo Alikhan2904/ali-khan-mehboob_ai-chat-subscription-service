@@ -1,4 +1,3 @@
-
 # AI Chat + Subscription Service
 
 This project simulates an AI chat service with a full subscription billing and quota system using TypeScript, Express, Prisma, and PostgreSQL. It follows Clean Architecture (DDD) principles.
@@ -19,6 +18,7 @@ This project simulates an AI chat service with a full subscription billing and q
 ## Quick Start: Docker Setup (Recommended)
 
 1. **Build and start everything (app, db, migrations, seed) with one command:**
+
    ```bash
    docker compose up --build
    ```
@@ -41,9 +41,11 @@ This project simulates an AI chat service with a full subscription billing and q
 ## How to Verify Everything is Working
 
 1. **Check logs:**
+
    ```bash
    docker compose logs app
    ```
+
    You should see: `Server is running on port 3000`
 
 2. **Test endpoints (example using curl):**
@@ -65,6 +67,7 @@ This project simulates an AI chat service with a full subscription billing and q
 ## Local Development (Advanced)
 
 If you want to run locally without Docker:
+
 ```bash
 npm install
 npx prisma migrate dev

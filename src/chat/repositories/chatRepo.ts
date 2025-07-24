@@ -1,12 +1,7 @@
-import { prisma } from "../../config/db";
+import { prisma } from '../../config/db';
 
 export const chatRepo = {
-  async createChat(
-    userId: string,
-    question: string,
-    answer: string,
-    tokens: number
-  ) {
+  async createChat(userId: string, question: string, answer: string, tokens: number) {
     return prisma.chat.create({ data: { userId, question, answer, tokens } });
   },
   async getMonthlyChatsByUser(userId: string) {
