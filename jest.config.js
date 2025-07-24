@@ -4,10 +4,8 @@ module.exports = {
   roots: ['<rootDir>/src'],
   moduleFileExtensions: ['ts', 'js', 'json'],
   testMatch: ['**/__tests__/**/*.test.ts'],
-  globals: {
-    'ts-jest': {
-      isolatedModules: true,
-    },
+  transform: {
+    '^.+\\.ts$': ['ts-jest', {}],
   },
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
 };
