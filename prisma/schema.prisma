@@ -1,0 +1,41 @@
+model User {
+  id    String  @id @default(uuid())
+  email String  @unique
+  name  String?
+  chats Chat[]
+  subscriptions Subscription[]
+}
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Chat {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  question  String
+  answer    String
+  tokens    Int
+  createdAt DateTime @default(now())
+}
+
+model Subscription {
+  id           String   @id @default(uuid())
+  userId       String
+  user         User     @relation(fields: [userId], references: [id])
+  tier         String
+  billingCycle String
+  price        Float
+  startDate    DateTime
+  endDate      DateTime
+  renewalDate  DateTime
+  autoRenew    Boolean
+  isActive     Boolean  @default(true)
+  usedMessages Int      @default(0)
+}
